@@ -1,5 +1,6 @@
 export default {
   name: 'Animation',
+  functional: true,
   props: {
     duration: {
       type: String,
@@ -26,50 +27,14 @@ export default {
       default: false
     },
   },
-  data () {
-    return {
-      loaded: false,
-      style: {},
-      className: {}
-    }
-  },
-  methods: {
-    start () {
-      const {duration, delay, iteration, name, animateClass} = this
-      this.className = [name, animateClass];
-      this.style = {
-        animationDuration: duration,
-        animationDelay: delay,
-        animationIterationCount: iteration
-      }
-      this.$el.addEventListener('animationend', this.end);
-      this.$emit('animationStarted');
-    },
-    end () {
-      this.className = [];
-      this.style = {};
-      this.$el.removeEventListener('animationend', this.end);
-      this.observer.disconnect();
-      this.$emit('animationEnded');
-    },
-  },
-  created() {
-    this.observer = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          this.start();
-        }
-      });
-    });
-  },
-  mounted() {
-    this.observer.observe(this.$el);
-  },
-  render (h) {
-    return h('div', {
-      attrs: this.$attrs,
-      style: this.style,
-      class: this.className
-    }, this.$slots.default)
+  render (h, ctx) {
+    const data = {
+      attrs: ctx.data.attrs,
+      directives: [
+        { name: 'animation-observer', value: ctx.props }
+      ]
+    };
+
+    return h('div', data, ctx.slots().default);
   }
-}
+};
