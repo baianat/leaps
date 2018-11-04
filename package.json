@@ -1,6 +1,6 @@
 {
   "name": "@baianat/vector",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Vuejs animation components",
   "module": "dist/vector.esm.js",
   "unpkg": "dist/vector.js",
