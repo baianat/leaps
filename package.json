@@ -2,8 +2,9 @@
   "name": "@baianat/vector",
   "version": "0.0.0",
   "description": "Vuejs animation components",
-  "main": "dist/js/vector.js",
-  "module": "dist/js/vector.esm.js",
+  "module": "dist/vector.esm.js",
+  "unpkg": "dist/vector.js",
+  "main": "dist/vector.js",
   "scripts": {
     "lint": "eslint ./src --fix",
     "build": "NODE_ENV=production node scripts/build",
