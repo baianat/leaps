@@ -18,7 +18,7 @@ const builds = {
     ]
   },
   output: {
-    format: 'es',
+    name: 'vector',
     banner:
       `/**
     * Vector ${version}

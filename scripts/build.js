@@ -10,21 +10,26 @@ const { builds, paths } = require('./config');
 
 const mkdirp = promisify(mkdirpNode);
 
-build();
+build('umd');
+build('es');
 
-async function build () {
+async function build (format) {
   await mkdirp(paths.dist);
-  console.log(chalk.cyan('Generating esm build...'));
+  console.log(chalk.cyan(`Generating ${format} build...`));
 
-  let bundle = await rollup(builds.input);
-  let { code } = await bundle.generate(builds.output);
-  let outputPath = path.join(paths.dist, 'vector.js');
+  const bundle = await rollup(builds.input);
+  const { code } = await bundle.generate({
+    format,
+    ...builds.output
+  });
+  let extensions = format === 'es' ? '.esm' : '';
+  const outputPath = path.join(paths.dist, `vector${extensions}.js`);
   fs.writeFile(outputPath, code, (err) => {
     if (err) {
       throw err;
     }
     let stats = getStats({ code, path: outputPath });
-    console.log(`${chalk.green('Output File:')} vector ${stats}`);
+    console.log(`${chalk.green(`Output File: vector ${format}`).padEnd(35, ' ')} ${stats}`);
   });
 }
 
@@ -32,7 +37,7 @@ function getStats ({ path, code }) {
   const { size } = fs.statSync(path);
   const gzipped = gzipSize.sync(code);
 
-  return `| Size: ${filesize(size)} | Gzip: ${filesize(gzipped)}`;
+  return `Size: ${filesize(size)} | Gzip: ${filesize(gzipped)}`;
 }
 
 module.exports = {

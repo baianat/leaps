@@ -1,3 +1,41 @@
+let ANIMATION_OBSERVER;
+
+function startAnimating (el) {
+  const { name, animateClass, delay, iteration, duration } = el.__vectorProps;
+  el.style.animationDelay = delay;
+  el.style.animationDuration = duration;
+  el.style.animationIterationCount = iteration;
+  el.classList.add(name, animateClass);
+
+  const onEnd = () => {
+    el.className = [];
+    el.style = {};
+    unobserve(el);
+    el.removeEventListener('animationend', onEnd);
+  };
+
+  el.addEventListener('animationend', onEnd);
+}
+
+export function unobserve (el) {
+  ANIMATION_OBSERVER.unobserve(el);
+}
+
+export function observe (el) {
+  ANIMATION_OBSERVER.observe(el);
+}
+
+export function initObserver () {
+  if (ANIMATION_OBSERVER) { return; }
+  ANIMATION_OBSERVER = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        startAnimating(entry.target);
+      }
+    });
+  });
+}
+
 export default {
   name: 'Animation',
   functional: true,

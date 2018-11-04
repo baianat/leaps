@@ -1,7 +1,7 @@
 <template>
 
 <div class="wrapper">
-  <Animation name="bounce" :iteration="2" delay="1s">
+  <Animation name="flash" :iteration="3" delay="1s">
     <!-- TODO: handle lazy image load -->
     <img alt="Test image" src="https://source.unsplash.com/random/200x200">
   </Animation>
