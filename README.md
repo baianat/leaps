@@ -1,3 +1,1 @@
-# Vector
-
-Vuejs animation components
+Declarative Vue.js animations library
