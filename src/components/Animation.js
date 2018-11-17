@@ -22,11 +22,13 @@ export function unobserve (el) {
 }
 
 export function observe (el) {
+  if (!ANIMATION_OBSERVER) { 
+    initObserver();
+   }
   ANIMATION_OBSERVER.observe(el);
 }
 
-export function initObserver () {
-  if (ANIMATION_OBSERVER) { return; }
+function initObserver () {
   ANIMATION_OBSERVER = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if(entry.isIntersecting) {
