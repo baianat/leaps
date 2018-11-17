@@ -2,6 +2,7 @@ let ANIMATION_OBSERVER;
 
 function startAnimating (el) {
   const { name, animateClass, delay, iteration, duration } = el.__moviaProps;
+  el.style.visibility = '';
   el.style.animationDelay = delay;
   el.style.animationDuration = duration;
   el.style.animationIterationCount = iteration;
@@ -62,14 +63,17 @@ export default {
       type: String,
       default: 'animated'
     },
-    lazy: {
+    visible: {
       type: Boolean,
       default: false
-    },
+    }
   },
   render (h, ctx) {
     const data = {
-      attrs: ctx.data.attrs,
+      ...ctx.data,
+      style: {
+        visibility: ctx.props.visible ? 'visible' : 'hidden'
+      },
       directives: [
         { name: 'animation-observer', value: ctx.props }
       ]

@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",
+    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "animate.css": "^3.7.0",
     "browser-sync": "^2.26.3",
     "chalk": "^2.4.1",

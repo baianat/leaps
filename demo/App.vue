@@ -2,11 +2,10 @@
 
 <div class="wrapper">
   <Animation name="flash" :iteration="3" delay="1s">
-    <!-- TODO: handle lazy image load -->
     <img alt="Test image" src="https://source.unsplash.com/random/200x200">
   </Animation>
   <div class="space"></div>
-    <Animation name="flash">
+  <Animation name="slideInUp" class="default-class">
     <img alt="Test image" src="https://source.unsplash.com/random/200x300">
   </Animation>
 </div>
