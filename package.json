@@ -1,6 +1,6 @@
 {
   "name": "movia",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Declarative Vue.js animations library",
   "module": "dist/movia.esm.js",
   "unpkg": "dist/movia.js",
