@@ -1,10 +1,10 @@
 {
-  "name": "@baianat/vector",
+  "name": "movia",
   "version": "0.0.1",
-  "description": "Vuejs animation components",
-  "module": "dist/vector.esm.js",
-  "unpkg": "dist/vector.js",
-  "main": "dist/vector.js",
+  "description": "Declarative Vue.js animations library",
+  "module": "dist/movia.esm.js",
+  "unpkg": "dist/movia.js",
+  "main": "dist/movia.js",
   "scripts": {
     "lint": "eslint ./src --fix",
     "build": "NODE_ENV=production node scripts/build",

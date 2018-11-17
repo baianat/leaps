@@ -1,5 +1,5 @@
 import Animation from './components/Animation.js';
-import { directive } from './vector';
+import { directive } from './movia';
 
 function install (Vue) {
   Vue.directive('animation-observer', directive);

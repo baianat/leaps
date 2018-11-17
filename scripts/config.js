@@ -18,10 +18,10 @@ const builds = {
     ]
   },
   output: {
-    name: 'vector',
+    name: 'movia',
     banner:
       `/**
-    * Vector ${version}
+    * Movia ${version}
     * (c) ${new Date().getFullYear()}
       * @license MIT
       */`,

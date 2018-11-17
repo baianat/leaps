@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import { install as Vector } from '../dist/vector';
+import { install as Movia } from '../dist/movia';
 import App from './App.vue';
 
-Vue.use(Vector);
+Vue.use(Movia);
 
 new Vue({
   el: '#app',

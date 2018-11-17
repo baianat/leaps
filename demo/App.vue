@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { Animation } from '../dist/vector.js'
+import { Animation } from '../dist/movia.js'
 import 'animate.css/animate.min.css';
 export default {
   name: 'App',

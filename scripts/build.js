@@ -23,13 +23,13 @@ async function build (format) {
     ...builds.output
   });
   let extensions = format === 'es' ? '.esm' : '';
-  const outputPath = path.join(paths.dist, `vector${extensions}.js`);
+  const outputPath = path.join(paths.dist, `movia${extensions}.js`);
   fs.writeFile(outputPath, code, (err) => {
     if (err) {
       throw err;
     }
     let stats = getStats({ code, path: outputPath });
-    console.log(`${chalk.green(`Output File: vector ${format}`).padEnd(35, ' ')} ${stats}`);
+    console.log(`${chalk.green(`Output File: movia ${format}`).padEnd(35, ' ')} ${stats}`);
   });
 }
 

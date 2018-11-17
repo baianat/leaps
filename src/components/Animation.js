@@ -1,7 +1,7 @@
 let ANIMATION_OBSERVER;
 
 function startAnimating (el) {
-  const { name, animateClass, delay, iteration, duration } = el.__vectorProps;
+  const { name, animateClass, delay, iteration, duration } = el.__moviaProps;
   el.style.animationDelay = delay;
   el.style.animationDuration = duration;
   el.style.animationIterationCount = iteration;
