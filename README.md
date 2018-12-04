@@ -5,7 +5,7 @@ Declarative Vue.js animations library
 ## Available Components
 
 * Animation
-* Parallax
+* Parallax (WIP)
 
 ## Getting started
 
