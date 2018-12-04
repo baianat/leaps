@@ -1,7 +1,7 @@
 <template>
 
 <div class="wrapper">
-  <Animation name="flash" :iteration="3" delay="1s">
+  <Animation name="slideInUp" delay="3s">
     <img alt="Test image" src="https://source.unsplash.com/random/200x200">
   </Animation>
   <div class="space"></div>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { Animation } from '../dist/movia.js'
+import { Animation } from '../dist/leaps.js'
 import 'animate.css/animate.min.css';
 export default {
   name: 'App',

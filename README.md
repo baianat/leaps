@@ -1,4 +1,4 @@
-# Movia
+# Leaps
 
 Declarative Vue.js animations library
 
@@ -14,19 +14,19 @@ Declarative Vue.js animations library
 First step is to install it using `yarn` or `npm`:
 
 ```bash
-npm install movia
+npm install leaps
 
 # or use yarn
-yarn add movia
+yarn add leaps
 ```
 
 ### Install Plug-in
 
 ```js
 import Vue from 'vue';
-import { install as Movia } from '../dist/movia';
+import { install as Leaps } from '../dist/leaps';
 
-Vue.use(Movia);
+Vue.use(Leaps);
 ```
 
 ## Animation Component

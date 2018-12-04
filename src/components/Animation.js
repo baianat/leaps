@@ -1,7 +1,7 @@
 let ANIMATION_OBSERVER;
 
 function startAnimating (el) {
-  const { name, animateClass, delay, iteration, duration } = el.__moviaProps;
+  const { name, animateClass, delay, iteration, duration } = el.__leapsProps;
   el.style.visibility = '';
   el.style.animationDelay = delay;
   el.style.animationDuration = duration;

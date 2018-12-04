@@ -18,10 +18,10 @@ const builds = {
     ]
   },
   output: {
-    name: 'movia',
+    name: 'leaps',
     banner:
       `/**
-    * Movia ${version}
+    * Leaps ${version}
     * (c) ${new Date().getFullYear()}
       * @license MIT
       */`,

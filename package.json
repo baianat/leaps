@@ -1,10 +1,10 @@
 {
-  "name": "movia",
+  "name": "leaps",
   "version": "0.0.2",
   "description": "Declarative Vue.js animations library",
-  "module": "dist/movia.esm.js",
-  "unpkg": "dist/movia.js",
-  "main": "dist/movia.js",
+  "module": "dist/leaps.esm.js",
+  "unpkg": "dist/leaps.js",
+  "main": "dist/leaps.js",
   "scripts": {
     "lint": "eslint ./src --fix",
     "build": "NODE_ENV=production node scripts/build",

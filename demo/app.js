@@ -1,8 +1,8 @@
 import Vue from 'vue';
-import { install as Movia } from '../dist/movia';
+import { install as Leaps } from '../dist/leaps';
 import App from './App.vue';
 
-Vue.use(Movia);
+Vue.use(Leaps);
 
 new Vue({
   el: '#app',
