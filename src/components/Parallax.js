@@ -1,34 +1,46 @@
-let OBSERVER_FLAG;
-let ALL_ELEMENTS = [];
-let SCROLLED = 0;
+let PARALLAX_OBSERVERS_FLAG;
+let PARALLAX_ELEMENTS = [];
+let SCROLLED;
 
-function unobserve (el) {
-  // todo:
+// scroll optimization https://developer.mozilla.org/en-US/docs/Web/Events/scroll
+function scrollHandler () {
+  SCROLLED = window.scrollY;
+  let ticking = false;
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      PARALLAX_ELEMENTS.forEach(el => el.update());
+      ticking = false;
+    });
+    ticking = true;
+  }
 }
-
-function observe (el) {
-  if (!OBSERVER_FLAG) { 
-    initObserver();
-   }
-  ALL_ELEMENTS.push(el);
-}
-
-function initObserver () {
-  // scroll optimization https://developer.mozilla.org/en-US/docs/Web/Events/scroll
-  OBSERVER_FLAG = true;
-  window.addEventListener('scroll', () => {
-    SCROLLED = window.scrollY;
-    let ticking = false;
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        ALL_ELEMENTS.forEach(el => el.animate());
-        ticking = false;
+function resizeHandler () {
+  let ticking = false;
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      PARALLAX_ELEMENTS.forEach(el => {
+        el.updateConfig();
+        el.update();
       });
-      ticking = true;
-    }
-  }, {
-    passive: true
-  });
+      ticking = false;
+    });
+    ticking = true;
+  }
+}
+
+function initObservers () {
+  PARALLAX_OBSERVERS_FLAG = true;
+  if (SCROLLED === undefined) {
+    SCROLLED = window.scrollY;
+  }
+  window.addEventListener('scroll', scrollHandler, { passive: true });
+  window.addEventListener('resize', resizeHandler, { passive: true });
+}
+
+function destroyObservers () {
+  PARALLAX_OBSERVERS_FLAG = false;
+  window.removeEventListener('scroll', scrollHandler, { passive: true });
+  window.removeEventListener('resize', resizeHandler, { passive: true });
 }
 
 export default {
@@ -67,16 +79,11 @@ export default {
     }
   },
   methods: {
-    init () {
-      observe(this);
-      this.initDefaults();
-    },
-    initDefaults () {
-      SCROLLED = window.scrollY;
+    updateConfig () {
       const elRect = this.$el.getBoundingClientRect();
       this.elRect = {
-        top: elRect.top + SCROLLED,
-        bottom: elRect.bottom + SCROLLED,
+        top: elRect.top + SCROLLED - (this.parallax.translateY || 0),
+        bottom: elRect.bottom + SCROLLED - (this.parallax.translateY || 0),
         height: elRect.height,
         width: elRect.width
       }
@@ -87,11 +94,6 @@ export default {
         if (!this[trans]) return;
         this.unitPerScroll[trans] = this.valuePerScroll(this[trans]);
       });
-    },
-    update () {
-      this.viewportHeight = window.innerHeight;
-      this.viewportWidth = window.innerWidth;
-      this.animate();
     },
     valuePerScroll ([start, end]) {
       return (end - start) / this.denominator;
@@ -105,7 +107,19 @@ export default {
       const lowerBound = Math.min(start, end);
       return Math.max(Math.min(start + uPS * this.moved, upperBound), lowerBound);
     },
-    animate () {
+    observe () {
+      if (!PARALLAX_OBSERVERS_FLAG) { 
+        initObservers();
+       }
+      PARALLAX_ELEMENTS.push(this);
+    },
+    unobserve () {
+      PARALLAX_ELEMENTS.splice(PARALLAX_ELEMENTS.indexOf(this), 1);
+      if (!PARALLAX_ELEMENTS.length) {
+        destroyObservers();
+      }
+    },
+    update () {
       if (this.inViewport()) {
         this.moved = SCROLLED - this.elRect.top + this.viewportHeight;
         ['translateX', 'translateY', 'scale', 'rotate', 'opacity'].forEach(trans => {
@@ -123,12 +137,16 @@ export default {
     }
   },
   mounted () {
-    this.init();
+    this.observe();
+    this.updateConfig();
     this.update();
   },
   render () {
     return this.$scopedSlots.default({
       parallax: this.parallax
     });
+  },
+  destroyed () {
+    this.unobserve();
   },
 }
