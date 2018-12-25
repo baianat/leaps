@@ -49,3 +49,26 @@ Vue.use(Leaps);
 |`animateClass`|'animated'|Main class name that triggers animation|
 |`name`        |''     |The animation class name|
 |`visible`     |false  |Set if element starts visible or hidden|
+
+## Parallax Component
+
+```html
+  <parallax :translateY="[0, 100]">
+    <div
+      class="box"
+      slot-scope="{ parallax }"
+      :style="`transform: translateY(${parallax.translateY}px)`"
+    ></div>
+  </parallax>
+```
+
+### Available Props
+
+|Prop          |Default|Description|
+|--------------|-------|-----------|
+|`translateX`  |null   |array of the [start, end] translate x values|
+|`translateY`  |null   |array of the [start, end] translate y values|
+|`rotate`      |null   |array of the [start, end] rotate values|
+|`scale`       |null   |array of the [start, end] scale values|
+|`opacity`     |null   |array of the [start, end] opacity values|
+|`finishRatio` |'1'    |ratio of the viewport, where the element should reach the end value|
