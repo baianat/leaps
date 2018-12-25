@@ -46,20 +46,13 @@ function destroyObservers () {
 export default {
   name: "LeapsParallax",
   props: {
-    translateX: {
-      type: Array
+    from: {
+      default: {},
+      type: Object
     },
-    translateY: {
-      type: Array
-    },
-    rotate: {
-      type: Array
-    },
-    scale: {
-      type: Array
-    },
-    opacity: {
-      type: Array
+    to: {
+      default: {},
+      type: Object
     },
     finishRatio: {
       default: 1,
@@ -73,7 +66,6 @@ export default {
       viewportWidth: 0,
       moved: 0,
       elRect: null,
-      output: {},
       unitPerScroll: {},
       parallax: {}
     }
@@ -89,23 +81,28 @@ export default {
       }
       this.viewportHeight = window.innerHeight;
       this.viewportWidth = window.innerWidth;
-      this.denominator = this.finishRatio * this.viewportHeight + (this.translateY ? this.translateY[1] : 0);
-      ['translateX', 'translateY', 'scale', 'rotate', 'opacity'].forEach(trans => {
-        if (!this[trans]) return;
-        this.unitPerScroll[trans] = this.valuePerScroll(this[trans]);
+      this.denominator = this.finishRatio * this.viewportHeight + (this.to.translateY || 0);
+      Object.keys(this.to).forEach(key => {
+        this.unitPerScroll[key] = this.valuePerScroll(key);
       });
+      this.parallax = Object.assign({}, this.from);
     },
-    valuePerScroll ([start, end]) {
-      return (end - start) / this.denominator;
+    valuePerScroll (key) {
+      const from = this.from[key] || 0;
+      const to = this.to[key];
+      return (to - from) / this.denominator;
     },
     inViewport () {
       return SCROLLED <= this.elRect.bottom &&
              SCROLLED >= this.elRect.top - this.viewportHeight;
     },
-    getValue ([start, end], uPS) {
-      const upperBound = Math.max(start, end);
-      const lowerBound = Math.min(start, end);
-      return Math.max(Math.min(start + uPS * this.moved, upperBound), lowerBound);
+    getValue (key) {
+      const from = this.from[key] || 0;
+      const to = this.to[key];
+      const uPS = this.unitPerScroll[key];
+      const upperBound = Math.max(from, to);
+      const lowerBound = Math.min(from, to);
+      return Math.max(Math.min(from + uPS * this.moved, upperBound), lowerBound);
     },
     observe () {
       if (!PARALLAX_OBSERVERS_FLAG) { 
@@ -122,17 +119,9 @@ export default {
     update () {
       if (this.inViewport()) {
         this.moved = SCROLLED - this.elRect.top + this.viewportHeight;
-        ['translateX', 'translateY', 'scale', 'rotate', 'opacity'].forEach(trans => {
-          if (!this[trans]) return;
-          this.output[trans] = this.getValue(this[trans], this.unitPerScroll[trans])
+        Object.keys(this.to).forEach(key => {
+          this.parallax[key] = this.getValue(key)
         });
-        this.parallax = {
-          translateX: this.output.translateX || 0,
-          translateY: this.output.translateY || 0,
-          rotate: this.output.rotate || 0,
-          scale: this.output.scale || 1,
-          opacity: this.output.opacity || 1
-        }
       }
     }
   },

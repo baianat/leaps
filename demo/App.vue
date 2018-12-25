@@ -1,7 +1,7 @@
 <template>
 
 <div class="wrapper">
-  <parallax :translateY="[0, 100]">
+  <parallax :from="{ translateY: 0 }" :to="{ translateY: 100 }">
     <div
       class="box"
       slot-scope="{ parallax }"

@@ -53,7 +53,7 @@ Vue.use(Leaps);
 ## Parallax Component
 
 ```html
-  <parallax :translateY="[0, 100]">
+  <parallax :from="{ translateY: 0 }" :to="{ translateY: 100 }">
     <div
       class="box"
       slot-scope="{ parallax }"
@@ -66,9 +66,6 @@ Vue.use(Leaps);
 
 |Prop          |Default|Description|
 |--------------|-------|-----------|
-|`translateX`  |null   |array of the [start, end] translate x values|
-|`translateY`  |null   |array of the [start, end] translate y values|
-|`rotate`      |null   |array of the [start, end] rotate values|
-|`scale`       |null   |array of the [start, end] scale values|
-|`opacity`     |null   |array of the [start, end] opacity values|
+|`from`        |{}     |object of start values|
+|`to`          |{}     |object of end values|
 |`finishRatio` |'1'    |ratio of the viewport, where the element should reach the end value|
