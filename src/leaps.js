@@ -3,7 +3,9 @@ import { observe, unobserve } from './components/Animation';
 const directive = {
   bind (el, { value }) {
     el.__leapsProps = value;
-    observe(el);
+    if (value.observe) {
+      observe(el);
+    }
   }, 
   destroyed (el) {
     unobserve(el);
