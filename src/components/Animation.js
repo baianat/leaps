@@ -40,7 +40,7 @@ function initObserver () {
 }
 
 export default {
-  name: 'Animation',
+  name: 'LeapsAnimation',
   functional: true,
   props: {
     duration: {
@@ -75,7 +75,7 @@ export default {
         visibility: ctx.props.visible ? 'visible' : 'hidden'
       },
       directives: [
-        { name: 'animation-observer', value: ctx.props }
+        { name: 'animation-observer', value: { ...ctx.props, observe: true } }
       ]
     };
 
