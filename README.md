@@ -1,4 +1,9 @@
 # Leaps
+<p align="center">
+  <a href="https://github.com/baianat/leaps" target="_blank">
+    <img width="400" alt="leaps logo" src="https://github.com/baianat/leaps/blob/master/leaps.svg">
+  </a>
+</p>
 
 Declarative Vue.js animations library
 
