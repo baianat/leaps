@@ -2,12 +2,12 @@
 
 <div class="wrapper">
     
-  <leaps :from="{ rotate: 0 }" :to="{ rotate: 180 }">
+  <leaps :from="{ translateX: 0 }" :to="{ translateX: 100 }">
     <div
       class="box"
       slot-scope="{ leaps }"
-      :style="`transform: rotate(${leaps.rotate}deg)`"
-    ></div>
+      :style="`transform: translateY(${leaps.translateX}px)`"
+    >{{ Math.round(leaps.translateX * 100) / 100 }}</div>
   </leaps>
   <div class="space"></div>
 
