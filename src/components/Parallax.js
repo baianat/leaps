@@ -57,6 +57,10 @@ export default {
     finishRatio: {
       default: 1,
       type: Number
+    },
+    elementHeight: {
+      default: true,
+      type: Boolean
     }
   },
   data () {
@@ -81,7 +85,10 @@ export default {
       }
       this.viewportHeight = window.innerHeight;
       this.viewportWidth = window.innerWidth;
-      this.denominator = this.finishRatio * this.viewportHeight + (this.to.translateY || 0);
+      this.denominator = 
+        this.finishRatio * this.viewportHeight + 
+        (this.to.translateY || 0) + 
+        (this.elementHeight ? this.elRect.height: 0);
       Object.keys(this.to).forEach(key => {
         this.unitPerScroll[key] = this.valuePerScroll(key);
       });
