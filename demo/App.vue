@@ -1,11 +1,21 @@
 <template>
 
 <div class="wrapper">
-  <parallax :from="{ translateY: 0 }" :to="{ translateY: 100 }">
+    
+  <leaps :from="{ rotate: 0 }" :to="{ rotate: 180 }">
+    <div
+      class="box"
+      slot-scope="{ leaps }"
+      :style="`transform: rotate(${leaps.rotate}deg)`"
+    ></div>
+  </leaps>
+  <div class="space"></div>
+
+  <parallax :from="{ rotate: 0 }" :to="{ rotate: 180 }">
     <div
       class="box"
       slot-scope="{ parallax }"
-      :style="`transform: translateY(${parallax.translateY}px)`"
+      :style="`transform: rotate(${parallax.rotate}deg)`"
     ></div>
   </parallax>
   <div class="space"></div>
@@ -17,13 +27,14 @@
 </template>
 
 <script>
-import { Parallax, Animation } from '../src/index.js'
+import { Parallax, Animation, Leaps } from '../src/index.js'
 import 'animate.css/animate.min.css';
 export default {
   name: 'App',
   components: {
     Parallax,
-    Animation
+    Animation,
+    Leaps
   }
 }
 </script>

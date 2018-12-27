@@ -1,15 +1,31 @@
-import { observe, unobserve } from './components/Animation';
-
-const directive = {
-  bind (el, { value }) {
-    el.__leapsProps = value;
-    if (value.observe) {
-      observe(el);
+export default {
+  name: "Leaps",
+  props: {
+    from: {
+      default: {},
+      type: Object
+    },
+    to: {
+      default: {},
+      type: Object
+    },
+    transition: {
+      default: 1000,
+      type: Number
     }
-  }, 
-  destroyed (el) {
-    unobserve(el);
+  },
+  data () {
+    return {
+      leaps: {}
+    }
+  },
+  methods: {
+  },
+  mounted () {
+  },
+  render () {
+    return this.$scopedSlots.default({
+      leaps: this.leaps
+    });
   }
-};
-
-export { directive };
+}
