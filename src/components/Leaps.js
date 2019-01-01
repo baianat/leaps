@@ -44,34 +44,36 @@ export default {
     return {
       looping: '',
       frameRate: 1/60,
-      start: 0,
-      end: 0,
+      start: {},
+      end: {},
       leaps: {},
+      velocities: {},
       isReverse: (() => this.direction === 'reverse')(),
       isAlternate: (() => this.direction === 'alternate')()
     }
   },
   computed: {
     isDumped () {
-      return Math.abs(this.leaps.velocity) <= this.precision;
+      return Object.keys(this.velocities).every(key => {
+        return Math.abs(this.velocities[key]) <= this.precision;
+      })
     }
   },
   methods: {
     setup () {
       Object.keys(this.to).forEach(key => {
         this.$set(this.leaps, key, 0);
+        this.$set(this.velocities, key, this.velocity);
       });
-      this.$set(this.leaps, 'velocity', this.velocity);
-      this.isR
     },
     loop () {
       Object.keys(this.to).forEach(key => {
-        let springForce = -this.stiffness * ( this.leaps[key] - this.end );
-        let damperForce = -this.damping * this.leaps.velocity;
+        let springForce = -this.stiffness * ( this.leaps[key] - this.end[key] );
+        let damperForce = -this.damping * this.velocities[key];
         let acceleration = ( springForce + damperForce ) / this.mass;
 
-        this.leaps.velocity += acceleration * this.frameRate;
-        this.leaps[key] += this.leaps.velocity * this.frameRate;
+        this.velocities[key] += acceleration * this.frameRate;
+        this.leaps[key] += this.velocities[key] * this.frameRate;
       });
 
       if (this.isDumped) {
@@ -80,11 +82,11 @@ export default {
     },
     play () {
       Object.keys(this.to).forEach(key => {
-        [this.start, this.end] = [this.from[key], this.to[key]];
+        [this.start[key], this.end[key]] = [this.from[key], this.to[key]];
         if (this.isReverse) {
-          [this.start, this.end] = [ this.end, this.start];
+          [this.start[key], this.end[key]] = [ this.end[key], this.start[key]];
         }
-        this.leaps[key] = this.start;
+        this.leaps[key] = this.start[key];
       });
       this.looping = setInterval(this.loop, this.frameRate * 1000);
     },
