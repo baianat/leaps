@@ -1,6 +1,6 @@
-import Animation from './components/Animation.js';
+import Leaps from './components/leaps';
 import Parallax from './components/Parallax.js';
-import Leaps from './leaps';
+import Animation from './components/Animation.js';
 import { observe, unobserve } from './components/Animation';
 
 function install (Vue) {

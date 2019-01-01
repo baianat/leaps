@@ -9,12 +9,12 @@ export default {
       default: {},
       type: Object
     },
-    // spring stiffness, in kg/s^2
+    // spring stiffness
     stiffness: {
-      default: 170,
+      default: 180,
       type: Number
     },
-    // damping constant, in kg/s
+    // damping constant
     damping: {
       default: 26,
       type: Number
@@ -31,16 +31,24 @@ export default {
     },
     // precision
     precision: {
-      default: 0.01,
+      default: 0.001,
       type: Number
+    },
+    // animation direction, forward, reverse, or alternate
+    direction: {
+      default: 'forward',
+      type: String
     }
   },
   data () {
     return {
       looping: '',
       frameRate: 1/60,
-      block: {},
-      leaps: {}
+      start: 0,
+      end: 0,
+      leaps: {},
+      isReverse: (() => this.direction === 'reverse')(),
+      isAlternate: (() => this.direction === 'alternate')()
     }
   },
   computed: {
@@ -51,13 +59,14 @@ export default {
   methods: {
     setup () {
       Object.keys(this.to).forEach(key => {
-        this.$set(this.leaps, key, this.from[key]);
+        this.$set(this.leaps, key, 0);
       });
       this.$set(this.leaps, 'velocity', this.velocity);
+      this.isR
     },
     loop () {
       Object.keys(this.to).forEach(key => {
-        let springForce = -this.stiffness * ( this.leaps[key] - this.to[key] );
+        let springForce = -this.stiffness * ( this.leaps[key] - this.end );
         let damperForce = -this.damping * this.leaps.velocity;
         let acceleration = ( springForce + damperForce ) / this.mass;
 
@@ -69,15 +78,29 @@ export default {
         this.stop();
       }
     },
+    play () {
+      Object.keys(this.to).forEach(key => {
+        [this.start, this.end] = [this.from[key], this.to[key]];
+        if (this.isReverse) {
+          [this.start, this.end] = [ this.end, this.start];
+        }
+        this.leaps[key] = this.start;
+      });
+      this.looping = setInterval(this.loop, this.frameRate * 1000);
+    },
     stop () {
       window.clearInterval(this.looping);
+      if (this.isAlternate) {
+        this.isReverse = !this.isReverse;
+        this.play();
+      }
     }
   },
   created() {
     this.setup();
   },
   mounted () {
-    this.looping = setInterval(this.loop, this.frameRate * 1000);
+    this.play();
   },
   render () {
     return this.$scopedSlots.default({
