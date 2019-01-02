@@ -1,7 +1,7 @@
 import Leaps from './components/leaps';
 import Parallax from './components/Parallax.js';
-import Animation from './components/Animation.js';
-import { observe, unobserve } from './components/Animation';
+import Wow from './components/Wow.js';
+import { observe, unobserve } from './components/Wow';
 
 function install (Vue) {
   const directive = {
@@ -15,9 +15,9 @@ function install (Vue) {
       unobserve(el);
     }
   };  
-  Vue.directive('animation-observer', directive);
+  Vue.directive('leaps-observer', directive);
 };
 
-export { Leaps, Animation, Parallax, install };
+export { Leaps, Wow, Parallax, install };
 
 export default Leaps;
