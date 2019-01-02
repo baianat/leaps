@@ -54,11 +54,11 @@ export default {
       default: {},
       type: Object
     },
-    finishRatio: {
+    viewportRatio: {
       default: 1,
       type: Number
     },
-    elementHeight: {
+    useElHeight: {
       default: true,
       type: Boolean
     }
@@ -86,9 +86,9 @@ export default {
       this.viewportHeight = window.innerHeight;
       this.viewportWidth = window.innerWidth;
       this.denominator = 
-        this.finishRatio * this.viewportHeight + 
+        this.viewportRatio * this.viewportHeight + 
         (this.to.translateY || 0) + 
-        (this.elementHeight ? this.elRect.height: 0);
+        (this.useElHeight ? this.elRect.height: 0);
       Object.keys(this.to).forEach(key => {
         this.unitPerScroll[key] = this.valuePerScroll(key);
       });

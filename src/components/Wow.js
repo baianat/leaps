@@ -63,7 +63,7 @@ export default {
       type: String,
       default: 'animated'
     },
-    visible: {
+    isVisible: {
       type: Boolean,
       default: false
     }
@@ -72,7 +72,7 @@ export default {
     const data = {
       ...ctx.data,
       style: {
-        visibility: ctx.props.visible ? 'visible' : 'hidden'
+        visibility: ctx.props.isVisible ? 'visible' : 'hidden'
       },
       directives: [
         { name: 'leaps-observer', value: { ...ctx.props, observe: true } }
