@@ -11,7 +11,7 @@ export default {
     },
     // spring stiffness
     stiffness: {
-      default: 180,
+      default: 170,
       type: Number
     },
     // damping constant
