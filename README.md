@@ -31,5 +31,5 @@ Vue.js physics based animation library
 ## Physics Based Animation
 
 <p align="center">
-  <a href="https://github.com/baianat/leaps/blob/master/demo/gifs/config.gif"><img width="600px" src="https://github.com/baianat/leaps/blob/master/demo/gifs/config.gif" alt="Config Animation"/></a>
+  <a href="https://baianat.github.io/leaps/leaps.html#configuration"><img width="600px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/config.gif" alt="Config Animation"/></a>
 </p>
