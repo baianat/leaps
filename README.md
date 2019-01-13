@@ -15,12 +15,17 @@
 
 Vue.js physics based animation library
 
-## Examples
+## Demos
 
 <p align="center">
-  <a href="https://github.com/baianat/leaps/blob/master/demo/gifs/innet%20text.gif"><img width="250px" src="https://github.com/baianat/leaps/blob/master/demo/gifs/innet%20text.gif" alt="Inner Text Animation"/></a>
-  <a href="https://github.com/baianat/leaps/blob/master/demo/gifs/basic.gif"><img width="320px" src="https://github.com/baianat/leaps/blob/master/demo/gifs/basic.gif" alt="Basic Animation"/></a>
-  <a href="https://github.com/baianat/leaps/blob/master/demo/gifs/svh.gif"><img width="250px" src="https://github.com/baianat/leaps/blob/master/demo/gifs/svh.gif" alt="SVG Animation"/></a>
+  <a href="https://github.com/baianat/leaps/blob/master/demos/gifs/innet%20text.gif"><img width="250px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/innet%20text.gif" alt="Inner Text Animation"/></a>
+  <a href="https://github.com/baianat/leaps/blob/master/demos/gifs/basic.gif"><img width="320px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/basic.gif" alt="Basic Animation"/></a>
+  <a href="https://github.com/baianat/leaps/blob/master/demos/gifs/svh.gif"><img width="250px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/svh.gif" alt="SVG Animation"/></a>
+</p>
+
+
+<p align="center">
+  <a href="https://github.com/baianat/leaps/blob/master/demos/air-hockey.gif"><img width="500px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/air-hockey.gif" alt="Inner Text Animation"/></a>
 </p>
 
 ## Physics Based Animation
