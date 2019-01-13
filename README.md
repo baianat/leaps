@@ -25,7 +25,7 @@ Vue.js physics based animation library
 
 
 <p align="center">
-  <a href="https://github.com/baianat/leaps/blob/master/demos/air-hockey.gif"><img width="500px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/air-hockey.gif" alt="Inner Text Animation"/></a>
+  <a href="https://github.com/baianat/leaps/blob/master/demos/air-hockey.vue"><img width="500px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/air-hockey.gif" alt="Inner Text Animation"/></a>
 </p>
 
 ## Physics Based Animation
