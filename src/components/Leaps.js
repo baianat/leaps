@@ -2,19 +2,19 @@ export default {
   name: "Leaps",
   props: {
     from: {
-      default: {},
+      default() { return {} },
       type: Object
     },
     to: {
-      default: {},
+      default() { return {} },
       type: Object
     },
-    // spring stiffness
+    // spring stiffness, in kg / s^2
     stiffness: {
       default: 170,
       type: Number
     },
-    // damping constant
+    // damping constant, in kg / s
     damping: {
       default: 26,
       type: Number
@@ -31,7 +31,7 @@ export default {
     },
     // precision
     precision: {
-      default: 0.001,
+      default: 0.1,
       type: Number
     },
     // animation direction, forward, reverse, or alternate
@@ -43,7 +43,7 @@ export default {
   data () {
     return {
       looping: '',
-      frameRate: 1/60,
+      frameRate: 1/60, // how many frame per ms
       start: {},
       end: {},
       leaps: {},
@@ -53,56 +53,70 @@ export default {
     }
   },
   computed: {
-    isDumped () {
+    isAnimationEnd () {
       return Object.keys(this.velocities).every(key => {
-        return Math.abs(this.velocities[key]) <= this.precision;
+        return this.velocities[key] === 0;
       })
     }
   },
   methods: {
     setup () {
       Object.keys(this.to).forEach(key => {
-        this.$set(this.leaps, key, 0);
+        this.$set(this.from, key, this.from[key] || 0);
         this.$set(this.velocities, key, this.velocity);
+        this.$set(this.leaps, key, this.isReverse ? this.from[key] : this.to[key]);
       });
     },
-    loop () {
+    animate () {
+      const end = this.isReverse ? this.from : this.to;
       Object.keys(this.to).forEach(key => {
-        let springForce = -this.stiffness * ( this.leaps[key] - this.end[key] );
+        let springForce = -this.stiffness * (this.leaps[key] - end[key]);
         let damperForce = -this.damping * this.velocities[key];
         let acceleration = ( springForce + damperForce ) / this.mass;
 
         this.velocities[key] += acceleration * this.frameRate;
         this.leaps[key] += this.velocities[key] * this.frameRate;
-      });
 
-      if (this.isDumped) {
+        if (
+          this.isDumped(
+            this.velocities[key],
+            this.leaps[key] - end[key]
+          )
+        ) {
+          this.velocities[key] = 0;
+          this.leaps[key] = Number(end[key]);
+        }
+      });
+    },
+    leap () {
+      if (this.$timeout) {
         this.stop();
       }
-    },
-    play () {
-      Object.keys(this.to).forEach(key => {
-        [this.start[key], this.end[key]] = [this.from[key], this.to[key]];
-        if (this.isReverse) {
-          [this.start[key], this.end[key]] = [ this.end[key], this.start[key]];
+      this.$timeout = setTimeout(() => {
+        this.$timeout = null;
+        this.animate();
+        if (this.isAnimationEnd && this.isAlternate) {
+          this.isReverse = !this.isReverse;
+          this.animate();
         }
-        this.leaps[key] = this.start[key];
-      });
-      this.looping = setInterval(this.loop, this.frameRate * 1000);
+      }, this.frameRate * 1000); // update every ms (60 fps)
     },
     stop () {
-      window.clearInterval(this.looping);
-      if (this.isAlternate) {
-        this.isReverse = !this.isReverse;
-        this.play();
-      }
+      clearTimeout(this.$timeout);
+      this.$timeout = null;
+    },
+    isDumped (velocity, distance) {
+      return Math.abs(velocity) < this.precision && Math.abs(distance) < this.precision;
     }
   },
   created() {
     this.setup();
   },
   mounted () {
-    this.play();
+    this.leap();
+  },
+  updated() {
+    this.leap();
   },
   render () {
     return this.$scopedSlots.default({
