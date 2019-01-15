@@ -69,7 +69,7 @@ The animation duration and easing is based on physics parameters (stiffness, dam
 <label>Mass: {{ mass }}</label>
 <input type="range" v-model="mass" min="1" max="5" step="0.1">
 
-<leaps :from="{ x: 0 }" :to="{ x: 400 }" :damping="damping" :mass="mass" :stiffness="stiffness" direction="alternate">
+<leaps :from="{ x: 0 }" :to="{ x: 400 }" :damping="Number(damping)" :mass="Number(mass)" :stiffness="Number(stiffness)" direction="alternate">
   <div
     class="box"
     slot-scope="{ leaps }"
@@ -78,6 +78,8 @@ The animation duration and easing is based on physics parameters (stiffness, dam
 {{ Math.round(leaps.x * 100) / 100 }}
    </div>
 </leaps>
+
+<Chart :damping="damping" :stiffness="stiffness" :mass="mass"></Chart>
 
 ## Props
 

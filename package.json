@@ -21,6 +21,7 @@
     "animate.css": "^3.7.0",
     "browser-sync": "^2.26.3",
     "chalk": "^2.4.1",
+    "chart.js": "^2.7.3",
     "css-loader": "^1.0.1",
     "filesize": "^3.6.1",
     "friendly-errors-webpack-plugin": "^1.7.0",
