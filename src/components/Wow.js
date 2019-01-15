@@ -10,7 +10,7 @@ function startAnimating (el) {
 
   const onEnd = () => {
     el.className = [];
-    el.style = {};
+    el.removeAttribute('style');
     unobserve(el);
     el.removeEventListener('animationend', onEnd);
   };
