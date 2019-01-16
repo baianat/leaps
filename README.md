@@ -40,10 +40,10 @@ Leaps is a set of simple, physics-based Vue.js animation components. It covers t
 
 ## Why Physics
 
-Traditional animation methods are based on duration time and ease function, while the animation goes from the start state to the end state.
+Traditional animation methods are based on duration time and ease function, while the animation goes from the start state to the end state, event if using Bézier easing can be very limiting. Due to having only two handles, you can't produce some complex physics effects. If you go beyond three sequences CSS become complex with delays and you end up having to do a lot of recalculation if you adjust the timing.
+
 Hard-coded durations are opposed to continuous, fluid interactivity. If your animation is interrupted mid-way, you'd get a weird completion animation if you hard-coded the time.
 Instead of hard-coded duration, we will use a [physical model](https://en.wikipedia.org/wiki/Damping_ratio) to determine our animation duration and easing, based on the element dumping, and mass. Instead of guessing the animation parameters that fits best with your animation, there is an interactive configuration section in the documentation that will guide you.
-
 
 <p align="center">
   <a href="https://baianat.github.io/leaps/leaps.html#configuration"><img width="600px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/config.gif" alt="Config Animation"/></a>
