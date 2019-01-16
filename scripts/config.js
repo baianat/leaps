@@ -2,7 +2,7 @@ const path = require('path');
 const resolve = require('rollup-plugin-node-resolve');
 const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
-const vue = require('rollup-plugin-vue').default;
+const vue = require('rollup-plugin-vue');
 const version = process.env.VERSION || require('../package.json').version;
 
 const paths = {
@@ -21,6 +21,7 @@ const builds = {
   },
   output: {
     name: 'leaps',
+    exports: 'named',
     banner:
       `/**
     * Leaps ${version}
