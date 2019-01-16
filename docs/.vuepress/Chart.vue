@@ -38,15 +38,21 @@ export default {
         let acceleration = ( springForce + damperForce ) / this.mass;
         velocity += acceleration * this.frameRate;
         from += velocity * this.frameRate;
-        return {x: time, y: from };
+        return {x: time * this.frameRate * 1000, y: from };
       });
       return {
         datasets: [{ 
-          label:'psition',
+          label:'ball',
           borderColor: 'rgb(75, 192, 192)',
           pointRadius: 0,
           fill: false,
           data
+        }, { 
+          label: 'equilibrium',
+          borderColor: 'rgba(0, 0, 0, 0.3)',
+          pointRadius: 0,
+          fill: false,
+          data: [{x:0, y: 400}, {x: 9000, y: 400}]
         }]
       };
     }
@@ -69,9 +75,17 @@ export default {
         },
         scales: {
           yAxes: [{
-            id: 'positon'
+            id: 'positon',
+            scaleLabel: {
+              display: true,
+              labelString: "Position X"
+            },
           }],
           xAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: "Time in (ms)"
+            },
             id: 'time',
               type: 'linear',
               position: 'bottom'

@@ -63,11 +63,11 @@ C1.6,4.2,1,5.7,1,7.3s0.6,3.2,1.8,4.3l7.6,7.6c0.4,0.4,1,0.7,1.6,0.7c0.6,0,1.2-0.2
 The animation duration and easing is based on physics parameters (stiffness, damping and mass), changing one of those parms or all can give you a different animation behavior. in this demo section there's a great "Spring Parameters Chooser" for you to have a feel of what spring is appropriate, rather than guessing a duration in the dark.
 
 <label>Damping: {{ damping }}</label>
-<input type="range" v-model="damping" min="10" max="100">
+<input type="range" v-model="damping" min="5" max="100">
 <label>Stiffness: {{ stiffness }}</label>
-<input type="range" v-model="stiffness" min="50" max="300">
+<input type="range" v-model="stiffness" min="50" max="1000">
 <label>Mass: {{ mass }}</label>
-<input type="range" v-model="mass" min="1" max="5" step="0.1">
+<input type="range" v-model="mass" min="1" max="10" step="0.5">
 
 <leaps :from="{ x: 0 }" :to="{ x: 400 }" :damping="Number(damping)" :mass="Number(mass)" :stiffness="Number(stiffness)" direction="alternate">
   <div
