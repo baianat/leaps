@@ -64,7 +64,7 @@ export default {
       Object.keys(this.to).forEach(key => {
         this.$set(this.from, key, this.from[key] || 0);
         this.$set(this.velocities, key, this.velocity);
-        this.$set(this.leaps, key, this.isReverse ? this.from[key] : this.to[key]);
+        this.$set(this.leaps, key, this.isReverse ? this.to[key] : this.from[key]);
       });
     },
     animate () {
