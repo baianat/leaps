@@ -1,23 +1,9 @@
 import Leaps from './components/leaps';
 import Parallax from './components/Parallax.js';
-import Wow from './components/Wow.js';
-import { observe, unobserve } from './components/Wow';
+import Wow, { install }  from './components/Wow.js';
+import Timeline from './components/Timeline.js';
 
-function install (Vue) {
-  const directive = {
-    bind (el, { value }) {
-      el.__leapsProps = value;
-      if (value.observe) {
-        observe(el);
-      }
-    }, 
-    destroyed (el) {
-      unobserve(el);
-    }
-  };  
-  Vue.directive('leaps-observer', directive);
-};
 
-export { Leaps, Wow, Parallax, install };
+export { Leaps, Wow, Parallax, Timeline, install };
 
 export default Leaps;
