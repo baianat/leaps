@@ -53,7 +53,7 @@ export default {
     }
   },
   computed: {
-    isAnimationEnd () {
+    isLeapEnd () {
       return Object.keys(this.velocities).every(key => {
         return this.velocities[key] === 0;
       })
@@ -89,21 +89,17 @@ export default {
       });
     },
     leap () {
-      if (this.$timeout) {
-        this.stop();
+      this.animate();
+      if (!this.isLeapEnd) {
+        window.requestAnimationFrame(this.leap);
+        return;
       }
-      this.$timeout = setTimeout(() => {
-        this.$timeout = null;
-        this.animate();
-        if (this.isAnimationEnd && this.isAlternate) {
-          this.isReverse = !this.isReverse;
-          this.animate();
-        }
-      }, this.frameRate * 1000); // update every ms (60 fps)
-    },
-    stop () {
-      clearTimeout(this.$timeout);
-      this.$timeout = null;
+      if (this.isAlternate) {
+        this.isReverse = !this.isReverse;
+        window.requestAnimationFrame(this.leap);
+        return;
+      }
+      this.$emit('leapEnd');
     },
     isDumped (velocity, distance) {
       return Math.abs(velocity) < this.precision && Math.abs(distance) < this.precision;
@@ -113,10 +109,7 @@ export default {
     this.setup();
   },
   mounted () {
-    this.leap();
-  },
-  updated() {
-    this.leap();
+    window.requestAnimationFrame(this.leap);
   },
   render () {
     return this.$scopedSlots.default({
