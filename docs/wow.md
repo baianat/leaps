@@ -3,9 +3,17 @@
 `Wow` component used to apply CSS animation class to the element when it enters the view-port.
 You can create your desired animation, or use [animista](http://animista.net/), (animate.css)[https://daneden.github.io/animate.css/], or any similar library.
 
-::: tip
-you can add a starter classes to `Wow` element, all classes will be removed when animation ends'
-:::
+## Install Plug-in
+
+Wow component requires to install it as a global plugin.
+
+```js
+import Vue from 'vue';
+import { Wow, install as WowPlugin } from '../dist/leaps';
+
+Vue.use(WowPlugin, { options });
+Vue.component('Wow', Wow);
+```
 
 ## Example
 
@@ -19,7 +27,13 @@ you can add a starter classes to `Wow` element, all classes will be removed when
 </wow>
 ```
 
-## Props
+## Plugin Options
+
+|Prop          |Default|Description|
+|--------------|-------|-----------|
+|`minViewport` |0      |Minim viewport width to apply wow effect, other wise show element instead|
+
+## Component Props
 
 |Prop          |Default|Description|
 |--------------|-------|-----------|

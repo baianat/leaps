@@ -1,4 +1,6 @@
-# Leaps
+# Getting started
+
+## Leaps
 
 Leaps is a set of simple, physics-based Vue.js animation components. It covers the most of your UI related animation needs where CSS just isn't enough anymore.
 
@@ -19,13 +21,4 @@ npm install leaps
 
 # or use yarn
 yarn add leaps
-```
-
-## Install Plug-in
-
-```js
-import Vue from 'vue';
-import { install as VueLeaps } from '../dist/leaps';
-
-Vue.use(VueLeaps);
 ```
