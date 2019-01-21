@@ -9,7 +9,7 @@ function startAnimating (el) {
   el.classList.add(name, animateClass);
 
   const onEnd = () => {
-    el.className = [];
+    el.classList.remove(name, animateClass);
     el.removeAttribute('style');
     unobserve(el);
     el.removeEventListener('animationend', onEnd);
@@ -79,6 +79,12 @@ export default {
       ]
     };
 
-    return h('div', data, ctx.slots().default);
+    const children = ctx.slots().default;
+    if (children.length === 1) {
+      const el = children[0];
+      return h(el.tag, { ...el.data, ...data }, el.children)
+    }
+
+    return h('div', data, children);
   }
 };
