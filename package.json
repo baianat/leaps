@@ -1,6 +1,6 @@
 {
   "name": "leaps",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Declarative Vue.js animations library",
   "module": "dist/leaps.esm.js",
   "unpkg": "dist/leaps.js",
