@@ -1,4 +1,5 @@
 let ANIMATION_OBSERVER;
+let OPTIONS;
 
 export default {
   name: 'LeapsWow',
@@ -27,6 +28,10 @@ export default {
     isVisible: {
       type: Boolean,
       default: false
+    },
+    tag: {
+      type: String,
+      default: null
     }
   },
   render (h, ctx) {
@@ -38,21 +43,28 @@ export default {
     };
 
     const children = ctx.slots().default;
-    if (children.length === 1) {
-      const el = children[0];
-      return h(el.tag || 'span', { ...el.data, ...data }, el.children || el.text)
+    if (!children && process.env.NODE_ENV !== 'production') {
+      console.warn('Your component does not have any elements');
+      return;
     }
-
-    return h('div', data, children);
+    if (children.length === 1 && !ctx.props.tag) {
+      const el = children[0];
+      const tag = el.tag || ctx.props.tag || OPTIONS.defaultTag;
+      return h(tag, { ...el.data, ...data }, el.children || el.text)
+    }
+    return h(ctx.props.tag || OPTIONS.defaultTag, data, children);
   }
 };
 
 export function install (Vue, options) {
-  options = {
-    ...{ minViewport: 0 },
+  OPTIONS = {
+    ...{ 
+      minViewport: 0,
+      defaultTag: 'span'
+    },
     ...options
   }
-  const mql = window.matchMedia(`(min-width: ${options.minViewport}px)`).matches
+  const mql = window.matchMedia(`(min-width: ${OPTIONS.minViewport}px)`).matches
   const directive = {
     bind (el, { value }) {
       if (!mql) {
