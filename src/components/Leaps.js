@@ -1,5 +1,8 @@
 export default {
-  name: "Leaps",
+  inject: {
+    $timeline: { default: null }
+  },
+  name: 'Leaps',
   props: {
     from: {
       default() { return {} },
@@ -69,6 +72,7 @@ export default {
     },
     animate () {
       const end = this.isReverse ? this.from : this.to;
+      // console.log(end.x);
       Object.keys(this.to).forEach(key => {
         let springForce = -this.stiffness * (this.leaps[key] - end[key]);
         let damperForce = -this.damping * this.velocities[key];
@@ -92,6 +96,13 @@ export default {
       this.animate();
       if (!this.isLeapEnd) {
         window.requestAnimationFrame(this.leap);
+        return;
+      }
+      if (this.$timeline) {
+        if (!this.$timeline.isLastFrame) {
+          this.$timeline.$emit('next');
+          window.requestAnimationFrame(this.leap);
+        }
         return;
       }
       if (this.isAlternate) {
