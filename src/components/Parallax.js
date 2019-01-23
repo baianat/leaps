@@ -44,7 +44,7 @@ function destroyObservers () {
 }
 
 export default {
-  name: "LeapsParallax",
+  name: 'LeapsParallax',
   props: {
     from: {
       default: {},
