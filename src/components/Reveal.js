@@ -2,7 +2,7 @@ let ANIMATION_OBSERVER;
 let OPTIONS;
 
 export default {
-  name: 'LeapsWow',
+  name: 'LeapsReveal',
   functional: true,
   props: {
     duration: {
