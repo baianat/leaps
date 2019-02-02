@@ -1,5 +1,4 @@
 let ANIMATION_OBSERVER;
-let OPTIONS;
 
 export default {
   name: 'LeapsReveal',
@@ -37,11 +36,16 @@ export default {
   render (h, ctx) {
     const data = {
       ...ctx.data,
+      style: {
+        visibility: ctx.props.visible ? 'visible' : 'hidden'
+      },
+      attrs: {
+        'aria-hidden': ctx.props.visible ? false : true
+      },
       directives: [
         { name: 'leaps-observer', value: ctx.props }
       ]
     };
-
     const children = ctx.slots().default;
     if (!children && process.env.NODE_ENV !== 'production') {
       console.warn('Your component does not have any elements');
@@ -49,28 +53,16 @@ export default {
     }
     if (children.length === 1 && !ctx.props.tag) {
       const el = children[0];
-      const tag = el.tag || ctx.props.tag || OPTIONS.defaultTag;
+      const tag = el.tag || ctx.props.tag || 'span';
       return h(tag, { ...el.data, ...data }, el.children || el.text)
     }
-    return h(ctx.props.tag || OPTIONS.defaultTag, data, children);
+    return h(ctx.props.tag || 'span', data, children);
   }
 };
 
-export function install (Vue, options) {
-  OPTIONS = {
-    ...{ 
-      minViewport: 0,
-      defaultTag: 'span'
-    },
-    ...options
-  }
-  const mql = window.matchMedia(`(min-width: ${OPTIONS.minViewport}px)`).matches
+export function install (Vue) {
   const directive = {
     bind (el, { value }) {
-      if (!mql) {
-        return
-      }
-      el.style.visibility = value.isVisible ? 'visible' : 'hidden'
       el.__leapsProps = value;
       observe(el);
     }, 
@@ -88,6 +80,7 @@ function startAnimating (el) {
   el.style.animationDuration = duration;
   el.style.animationIterationCount = iteration;
   el.classList.add(name, animateClass);
+  el.setAttribute('aria-hidden', false);
 
   const onEnd = () => {
     el.classList.remove(name, animateClass);
