@@ -1,37 +1,32 @@
-# Wow
+# Reveal
 
-`Wow` component used to apply CSS animation class to the element when it enters the view-port.
+`Reveal` component used to apply CSS animation class to the element when it enters the view-port.
 You can create your desired animation, or use [animista](http://animista.net/), (animate.css)[https://daneden.github.io/animate.css/], or any similar library.
 
 ## Install Plug-in
 
-Wow component requires to install it as a global plugin.
+Reveal component requires to install it as a global plugin.
 
 ```js
 import Vue from 'vue';
-import { Wow, install as WowPlugin } from '../dist/leaps';
+import { Reveal, install as RevealPlugin } from '../dist/leaps';
 
-Vue.use(WowPlugin, { options });
-Vue.component('Wow', Wow);
+Vue.use(RevealPlugin, { options });
+Vue.component('Reveal', Reveal);
 ```
 
 ## Example
 
-<wow name="bounceInTop">
+<reveal name="bounceInTop">
   <div class="box"></div>
-</wow>
+</reveal>
 
 ```vue
-<wow name="bounce">
+<reveal name="bounce">
   <div class="box"></div>
-</wow>
+</reveal>
 ```
 
-## Plugin Options
-
-|Prop          |Default|Description|
-|--------------|-------|-----------|
-|`minViewport` |0      |Minim viewport width to apply wow effect, other wise show element instead|
 
 ## Component Props
 
@@ -42,6 +37,7 @@ Vue.component('Wow', Wow);
 |`iteration`   |1      |The number of times an animation cycle should be played before stopping.|
 |`animateClass`|'animated'|Main class name that triggers animation|
 |`name`        |''     |The animation class name|
+|`tag`         |'span' |Element tag name|
 |`visible`     |false  |Set if element starts visible or hidden|
 
 <style lang="stylus">

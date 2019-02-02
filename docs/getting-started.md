@@ -10,7 +10,7 @@ Leaps does not have to resort to using hard-coded easing curves and duration. Se
 
 * [Leaps](/leaps.html)
 * [Parallax](/parallax.html)
-* [wow](/wow.html)
+* [Reveal](/reveal.html)
 
 ## Installation
 

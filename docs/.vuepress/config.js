@@ -23,13 +23,13 @@ module.exports = {
         nav: [
           { text: 'Leaps', link: '/leaps' },
           { text: 'Parallax', link: '/parallax' },
-          { text: 'Wow', link: '/wow' }
+          { text: 'Reveal', link: '/reveal' }
         ],
         sidebar: [
           'getting-started',
           'leaps',
           'parallax',
-          'wow'
+          'reveal'
         ]
       }
     }

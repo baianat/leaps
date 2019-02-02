@@ -23,7 +23,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/baianat/leaps/blob/master/demos/superheros.vue"><img width="500px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/superheros.gif" alt="Inner Text Animation"/></a>
+  <a href="https://github.com/baianat/leaps/blob/master/demos/superheros.vue"><img width="700px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/superheros.gif" alt="Inner Text Animation"/></a>
 </p>
 
 # Leaps
