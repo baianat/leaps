@@ -18,9 +18,12 @@
   <a href="https://github.com/baianat/leaps/blob/master/demos/gifs/svh.gif"><img width="250px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/svh.gif" alt="SVG Animation"/></a>
 </p>
 
-
 <p align="center">
   <a href="https://github.com/baianat/leaps/blob/master/demos/air-hockey.vue"><img width="500px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/air-hockey.gif" alt="Inner Text Animation"/></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/baianat/leaps/blob/master/demos/superheros.vue"><img width="500px" src="https://github.com/baianat/leaps/blob/master/demos/gifs/superheros.gif" alt="Inner Text Animation"/></a>
 </p>
 
 # Leaps
@@ -33,10 +36,8 @@ Leaps is a set of simple, physics-based Vue.js animation components. It covers t
   * The primary animation component, which is a spring-physics based. Its main role is to move property from one value to another, with more natural animation and easing.
 * [Parallax](https://baianat.github.io/leaps/parallax.html)
   * Used move property from one value to another, based on the scrolled distance.
-* [wow](https://baianat.github.io/leaps/wow.html)
-  * Used to apply CSS animation class to the element when it enters the view-port.
-* [Timeline]()
-  * Coming soon.
+* [Reveal](https://baianat.github.io/leaps/Reveal.html)
+  * Used to apply CSS animation class to an element, when it enters the view-port.
 
 ## Why Physics
 
