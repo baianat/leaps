@@ -2,6 +2,8 @@
 daysUntilStale: 7
 # Number of days of inactivity before a stale issue is closed
 daysUntilClose: 7
+# Label to use when marking as stale
+staleLabel: false
 # Issues with these labels will never be considered stale
 exemptLabels:
   - pinned
