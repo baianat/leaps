@@ -28,6 +28,7 @@
     "path": "^0.12.7",
     "rollup": "^1.1.0",
     "rollup-plugin-babel": "^4.3.0",
+    "rollup-plugin-commonjs": "^9.2.2",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-replace": "^2.1.0",
     "rollup-plugin-vue": "^4.6.1",
@@ -45,5 +46,7 @@
     }
   ],
   "optionalDependencies": {},
-  "dependencies": {}
+  "dependencies": {
+    "lodash.merge": "^4.6.1"
+  }
 }

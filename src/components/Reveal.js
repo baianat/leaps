@@ -1,3 +1,5 @@
+import merge from 'lodash.merge';
+
 let ANIMATION_OBSERVER;
 
 export default {
@@ -34,18 +36,19 @@ export default {
     }
   },
   render (h, ctx) {
-    const data = {
-      ...ctx.data,
-      style: {
-        visibility: ctx.props.visible ? 'visible' : 'hidden'
-      },
-      attrs: {
-        'aria-hidden': ctx.props.visible ? false : true
-      },
-      directives: [
-        { name: 'leaps-observer', value: ctx.props }
-      ]
-    };
+    const data = merge(
+      ctx.data,
+      {
+        style: {
+          visibility: ctx.props.visible ? 'visible' : 'hidden'
+        },
+        attrs: {
+          'aria-hidden': ctx.props.visible ? false : true
+        },
+        directives: [
+          { name: 'leaps-observer', value: ctx.props }
+        ]
+      });
     const children = ctx.slots().default;
     if (!children && process.env.NODE_ENV !== 'production') {
       console.warn('Your component does not have any elements');
@@ -54,7 +57,8 @@ export default {
     if (children.length === 1 && !ctx.props.tag) {
       const el = children[0];
       const tag = el.tag || ctx.props.tag || 'span';
-      return h(tag, { ...el.data, ...data }, el.children || el.text)
+      const elData = merge(el.data, data);
+      return h(tag, elData, el.children || el.text)
     }
     return h(ctx.props.tag || 'span', data, children);
   }

@@ -3,6 +3,7 @@ const resolve = require('rollup-plugin-node-resolve');
 const babel = require('rollup-plugin-babel');
 const replace = require('rollup-plugin-replace');
 const vue = require('rollup-plugin-vue');
+const commonjs = require('rollup-plugin-commonjs');
 const version = process.env.VERSION || require('../package.json').version;
 
 const paths = {
@@ -16,7 +17,8 @@ const builds = {
       replace({ __VERSION__: version }),
       vue(),
       babel(),
-      resolve()
+      resolve(),
+      commonjs()
     ]
   },
   output: {
